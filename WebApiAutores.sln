@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiAutores", "WebApiAutores\WebApiAutores.csproj", "{48C2C974-0E2B-409A-8979-72BB2378F193}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{48C2C974-0E2B-409A-8979-72BB2378F193}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48C2C974-0E2B-409A-8979-72BB2378F193}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48C2C974-0E2B-409A-8979-72BB2378F193}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48C2C974-0E2B-409A-8979-72BB2378F193}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {43A28A9F-6F07-43E0-9F23-5B950DF048CA}
+	EndGlobalSection
+EndGlobal
