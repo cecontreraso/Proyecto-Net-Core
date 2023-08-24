@@ -1,38 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Programa QA\\Proyecto-Net-Core\\WebApiAutores\\WebApiAutores.csproj": {}
+    "D:\\Proyectos\\Proyecto-Net-Core\\WebApiAutores\\WebApiAutores\\WebApiAutores.csproj": {}
   },
   "projects": {
-    "C:\\Programa QA\\Proyecto-Net-Core\\WebApiAutores\\WebApiAutores.csproj": {
+    "D:\\Proyectos\\Proyecto-Net-Core\\WebApiAutores\\WebApiAutores\\WebApiAutores.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Programa QA\\Proyecto-Net-Core\\WebApiAutores\\WebApiAutores.csproj",
+        "projectUniqueName": "D:\\Proyectos\\Proyecto-Net-Core\\WebApiAutores\\WebApiAutores\\WebApiAutores.csproj",
         "projectName": "WebApiAutores",
-        "projectPath": "C:\\Programa QA\\Proyecto-Net-Core\\WebApiAutores\\WebApiAutores.csproj",
-        "packagesPath": "C:\\Users\\ccoadm\\.nuget\\packages\\",
-        "outputPath": "C:\\Programa QA\\Proyecto-Net-Core\\WebApiAutores\\obj\\",
+        "projectPath": "D:\\Proyectos\\Proyecto-Net-Core\\WebApiAutores\\WebApiAutores\\WebApiAutores.csproj",
+        "packagesPath": "C:\\Users\\cesar\\.nuget\\packages\\",
+        "outputPath": "D:\\Proyectos\\Proyecto-Net-Core\\WebApiAutores\\WebApiAutores\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages",
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Progress\\ToolboxNuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\ccoadm\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 18.2.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 23.1.config",
+          "C:\\Users\\cesar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Telerik UI for WPF.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 18.2\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\DevExpress 23.1\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
