@@ -12,5 +12,6 @@ namespace WebApiAutores
         }
         //Ademas se pueden configurar las tablas
         public DbSet<Autor> Autores { get; set; }
+        public DbSet<Libro> Libros { get; set; }
     }
 }

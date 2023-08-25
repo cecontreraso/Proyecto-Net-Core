@@ -1,5 +1,7 @@
 ﻿
 
+using Microsoft.EntityFrameworkCore;
+
 namespace WebApiAutores
 {
     public class Startup
@@ -11,11 +13,13 @@ namespace WebApiAutores
 
         public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)//Proovedor de configuracion para acceder a la data de los proovedor
         {
             //Aqui se van a configurar los servicios
             //Se cortan los services de la parte de program
             services.AddControllers();
+
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
