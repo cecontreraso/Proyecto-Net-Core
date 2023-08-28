@@ -5,7 +5,8 @@ using WebApiAutores.Entidades;
 namespace WebApiAutores.Controllers
 {
     [ApiController]//Atibuto, hace validaciones automaticas respecto a la data recibida
-    [Route("api/autores")]//Ruta de la API
+    [Route("api/autores")]//Ruta de la API [controller] usa el prefijo de la clase del controller
+
     public class AutoresController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -16,7 +17,9 @@ namespace WebApiAutores.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet]//api/autores
+        [HttpGet("listado")]//api/autores/listado
+        [HttpGet("/listado")]//ruta especifica reemplazada al api/autores, por /listado
         public async Task<ActionResult<List<Autor>>> Get()
         {
             //return new List<Autor>()
@@ -26,12 +29,36 @@ namespace WebApiAutores.Controllers
             //    new Autor() { Id = 2, Nombre = "Felipe"}
             //};
 
-            return await _context.Autores.ToListAsync();
+            return await _context.Autores.Include(x => x.Libros).ToListAsync();//para incluir la informacion de los libros en el get de los autores
 
 
         }
-        [HttpPost]
-        public async Task<ActionResult> Post(Autor autor)
+
+
+        [HttpGet("primero")]//De esta manera se le da una ruta especifica al metodo api/autores/primero?nombre=felipe&apellido=gavilar
+        public async Task<ActionResult<Autor>> PrimerAutor([FromHeader] int miValor, [FromQuery] string nombre)//especifica que el valor lo va a buscar el header
+        {
+
+
+            return await _context.Autores.FirstOrDefaultAsync();//para incluir la informacion de los libros en el get de los autores
+        }
+
+        [HttpGet("{id:int}/(param2=persona)")]//esto se hace para que pueda buscar por dos parametros y el signo de interrgocacion hace que el segundo parametro es opcional
+        public async Task<ActionResult<Autor>> Get(int id, string param2)
+        {
+             var autor = await _context.Autores.FirstOrDefaultAsync(x => x.Id == id);
+            if (autor == null) 
+            {
+                return NotFound();
+            }
+            else
+            {
+                return autor;
+            }
+        }
+
+        [HttpPost]//Con [FromBody especificamos que la informacion viene el body]
+        public async Task<ActionResult> Post([FromBody]Autor autor)
         {
             _context.Add(autor);
             await _context.SaveChangesAsync();//guardar los cambios de maner asyncrona

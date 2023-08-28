@@ -1,6 +1,8 @@
 ﻿
 
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.Xml;
+using System.Text.Json.Serialization;
 
 namespace WebApiAutores
 {
@@ -17,7 +19,7 @@ namespace WebApiAutores
         {
             //Aqui se van a configurar los servicios
             //Se cortan los services de la parte de program
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions (x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);//configuracion del json para desabilitar los cycles que inpiden la muestra de data
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
