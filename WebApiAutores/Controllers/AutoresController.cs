@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApiAutores.Entidades;
+using WebApiAutores.Servicios;
 
 namespace WebApiAutores.Controllers
 {
@@ -10,10 +11,19 @@ namespace WebApiAutores.Controllers
     public class AutoresController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IServicio servicio;
+        private readonly ServicioTransient servicioTransient;
+        private readonly ServicioSingleton servicioSingleton;
+        private readonly ServicioScoped servicioScoped;
 
-        public AutoresController(ApplicationDbContext context)//constructor de la clase
+        public AutoresController(ApplicationDbContext context, IServicio servicio, ServicioTransient servicioTransient, 
+            ServicioSingleton servicioSingleton, ServicioScoped servicioScoped)//constructor de la clase
         {
             this._context = context;
+            this.servicio = servicio;
+            this.servicioTransient = servicioTransient;
+            this.servicioSingleton = servicioSingleton;
+            this.servicioScoped = servicioScoped;
         }
 
 
@@ -32,6 +42,23 @@ namespace WebApiAutores.Controllers
             return await _context.Autores.Include(x => x.Libros).ToListAsync();//para incluir la informacion de los libros en el get de los autores
 
 
+        }
+
+
+        [HttpGet("GUID")]
+        public ActionResult ObtenerGuids()
+        {
+            return Ok(new
+            {
+                AutoresControllerTransiet = servicioTransient.Guid,
+                AutoresControllerScoped = servicioScoped.Guid,
+                AutoresControllerSingleton = servicioSingleton.Guid,
+                ServicioA_Transient = servicio.ObtenerTransient(),
+                ServicioA_Scoped = servicio.ObtenerScoped(),
+                ServicioA_Singleton = servicio.ObtenerSinglenton()
+
+
+            });
         }
 
 
@@ -60,6 +87,15 @@ namespace WebApiAutores.Controllers
         [HttpPost]//Con [FromBody especificamos que la informacion viene el body]
         public async Task<ActionResult> Post([FromBody]Autor autor)
         {
+
+            var existeAutorConMismoNombre = await  _context.Autores.AnyAsync(x => x.Nombre == autor.Nombre);//Ve a la tabla de autores y dime si hay una coincidencia
+
+            if (existeAutorConMismoNombre)
+            {
+                return BadRequest($"Existe ya un autor con el mismo nombre {autor.Nombre}");
+            }
+
+
             _context.Add(autor);
             await _context.SaveChangesAsync();//guardar los cambios de maner asyncrona
             return Ok();
@@ -79,11 +115,6 @@ namespace WebApiAutores.Controllers
                 return Ok();
             }
 
-            var existeAutor = await _context.Autores.AnyAsync(x => x.Id == id);
-            if (!existeAutor)
-            {
-                return NotFound();
-            }
         }
 
         [HttpDelete("{id:int}")]//para llamar a este http seria api/autores/algo

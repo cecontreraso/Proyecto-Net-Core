@@ -3,6 +3,8 @@
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography.Xml;
 using System.Text.Json.Serialization;
+using WebApiAutores.Controllers;
+using WebApiAutores.Servicios;
 
 namespace WebApiAutores
 {
@@ -20,8 +22,18 @@ namespace WebApiAutores
             //Aqui se van a configurar los servicios
             //Se cortan los services de la parte de program
             services.AddControllers().AddJsonOptions (x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);//configuracion del json para desabilitar los cycles que inpiden la muestra de data
-
+            //Servicio no es mas que una dependencia
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
+            services.AddTransient<IServicio, ServicioA>();//que cuando una clase requiera un iservicio pasa a un servicioA
+
+            //services.AddScoped<>; tiempo de vida de la clase de ServicioA, se nos va a dar la misma instancia, pero en distintas peticiones dan distintas instancias
+            //services.AddSingleton<> siempre tenemos la misma instancia, independiente del tiempo y las peticiones
+
+
+            services.AddTransient<ServicioTransient>();
+            services.AddScoped<ServicioScoped>();
+            services.AddSingleton<ServicioSingleton>();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
