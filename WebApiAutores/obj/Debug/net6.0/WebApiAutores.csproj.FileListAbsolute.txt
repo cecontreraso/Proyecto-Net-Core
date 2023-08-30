@@ -117,3 +117,4 @@ C:\Programa QA\Proyecto-Net-Core\WebApiAutores\obj\Debug\net6.0\refint\WebApiAut
 C:\Programa QA\Proyecto-Net-Core\WebApiAutores\obj\Debug\net6.0\WebApiAutores.pdb
 C:\Programa QA\Proyecto-Net-Core\WebApiAutores\obj\Debug\net6.0\WebApiAutores.genruntimeconfig.cache
 C:\Programa QA\Proyecto-Net-Core\WebApiAutores\obj\Debug\net6.0\ref\WebApiAutores.dll
+C:\Programa QA\Proyecto-Net-Core\WebApiAutores\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

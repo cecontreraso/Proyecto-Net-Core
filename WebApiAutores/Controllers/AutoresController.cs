@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApiAutores.Entidades;
 using WebApiAutores.Servicios;
@@ -15,30 +16,29 @@ namespace WebApiAutores.Controllers
         private readonly ServicioTransient servicioTransient;
         private readonly ServicioSingleton servicioSingleton;
         private readonly ServicioScoped servicioScoped;
+        private readonly ILogger<AutoresController> logger;
 
         public AutoresController(ApplicationDbContext context, IServicio servicio, ServicioTransient servicioTransient, 
-            ServicioSingleton servicioSingleton, ServicioScoped servicioScoped)//constructor de la clase
+            ServicioSingleton servicioSingleton, ServicioScoped servicioScoped, ILogger<AutoresController> logger)//constructor de la clase
         {
             this._context = context;
             this.servicio = servicio;
             this.servicioTransient = servicioTransient;
             this.servicioSingleton = servicioSingleton;
             this.servicioScoped = servicioScoped;
+            this.logger = logger;
         }
 
 
         [HttpGet]//api/autores
         [HttpGet("listado")]//api/autores/listado
         [HttpGet("/listado")]//ruta especifica reemplazada al api/autores, por /listado
+        [ResponseCache(Duration = 10)]
+        [Authorize]
         public async Task<ActionResult<List<Autor>>> Get()
         {
-            //return new List<Autor>()
-            //{
 
-            //    new Autor() { Id = 1, Nombre = "Cesar"},
-            //    new Autor() { Id = 2, Nombre = "Felipe"}
-            //};
-
+            logger.LogInformation("Estamos obteniendo los autores");
             return await _context.Autores.Include(x => x.Libros).ToListAsync();//para incluir la informacion de los libros en el get de los autores
 
 
@@ -46,6 +46,7 @@ namespace WebApiAutores.Controllers
 
 
         [HttpGet("GUID")]
+        [ResponseCache(Duration = 10)]//se va a guardar el cache de la ultima peticion durante 10 segundos
         public ActionResult ObtenerGuids()
         {
             return Ok(new
