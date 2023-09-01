@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography.Xml;
 using System.Text.Json.Serialization;
 using WebApiAutores.Controllers;
+using WebApiAutores.Filtros;
 using WebApiAutores.Middlewares;
 using WebApiAutores.Servicios;
 
@@ -23,7 +24,10 @@ namespace WebApiAutores
         {
             //Aqui se van a configurar los servicios
             //Se cortan los services de la parte de program
-            services.AddControllers().AddJsonOptions (x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);//configuracion del json para desabilitar los cycles que inpiden la muestra de data
+            services.AddControllers(opcions =>
+            {
+                opcions.Filters.Add(typeof(FiltroDeExcepcion));
+            }).AddJsonOptions (x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);//configuracion del json para desabilitar los cycles que inpiden la muestra de data
             //Servicio no es mas que una dependencia
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
             services.AddTransient<IServicio, ServicioA>();//que cuando una clase requiera un iservicio pasa a un servicioA
@@ -36,6 +40,8 @@ namespace WebApiAutores
             services.AddScoped<ServicioScoped>();
             services.AddSingleton<ServicioSingleton>();
 
+            //servicio de mi filtro
+            services.AddTransient<MiFiltroDeAccion>();
 
             //servicio del catching
             services.AddResponseCaching();
