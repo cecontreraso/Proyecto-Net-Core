@@ -50,7 +50,6 @@ namespace WebApiAutores
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger) //env es el ambiente
@@ -71,8 +70,7 @@ namespace WebApiAutores
 
             if (env.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+
             }
 
             app.UseHttpsRedirection();
